@@ -1,0 +1,21 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.json());
+
+let data = [];
+
+app.post('/data', (req, res) => {
+    data.push(req.body);
+    res.sendStatus(200);
+});
+
+app.get('/data', (req, res) => {
+    res.json(data);
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}/`);
+});
