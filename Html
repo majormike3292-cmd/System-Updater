@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Data</title>
+</head>
+<body>
+    <h1>Monitoring Data</h1>
+    <div id="data-container"></div>
 
+    <script>
+        async function fetchData() {
+            const response = await fetch('http://your-server-ip:3000/data');
+            const data = await response.json();
+            displayData(data);
+        }
+
+        function displayData(data) {
+            const container = document.getElementById('data-container');
+            container.innerHTML = '';
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.textContent = `Type: ${item.type}, Data: ${item.data}`;
+                container.appendChild(div);
+            });
+        }
+
+        setInterval(fetchData, 5000); // Fetch data every 5 seconds
+        fetchData(); // Initial fetch
+    </script>
+</body>
+</html>
